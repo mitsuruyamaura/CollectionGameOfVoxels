@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private PlayerAnimation playerAnim;
 
+    private float moveX;
+    private float moveZ;
+
     void Start()
     {
         TryGetComponent(out rb);
@@ -19,19 +22,19 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
+        moveX = Input.GetAxis("Horizontal");
+        moveZ = Input.GetAxis("Vertical");
     }
 
     void FixedUpdate() {
         Move();    
     }
 
+    /// <summary>
+    /// ˆÚ“®
+    /// </summary>
     private void Move() {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        rb.velocity = new Vector3(x, rb.velocity.y, z) * moveSpeed;
-
+        rb.velocity = new Vector3(moveX, rb.velocity.y, moveZ) * moveSpeed;
 
         if (playerAnim && rb.velocity != Vector3.zero) {
             playerAnim.PlayWalkAnim(rb.velocity.sqrMagnitude);
