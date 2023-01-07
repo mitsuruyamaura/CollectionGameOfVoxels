@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerController : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     [SerializeField]
     private float moveSpeed = 3.0f;
