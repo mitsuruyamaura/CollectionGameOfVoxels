@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000010921973622, guid: af16961524284e54491133548920258b, type: 3}
       propertyPath: m_Name
-      value: SphereGemSmall
+      value: SphereGemSmall Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010921973622, guid: af16961524284e54491133548920258b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4000011134189418, guid: af16961524284e54491133548920258b, type: 3}
       propertyPath: m_RootOrder
@@ -17,15 +21,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011134189418, guid: af16961524284e54491133548920258b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31.22
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000011134189418, guid: af16961524284e54491133548920258b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000011134189418, guid: af16961524284e54491133548920258b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 59.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000011134189418, guid: af16961524284e54491133548920258b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -59,5 +63,42 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d3fdd53a2b5dd904fad8d824266a4cad, type: 2}
+    - target: {fileID: 114000013812041550, guid: af16961524284e54491133548920258b, type: 3}
+      propertyPath: isScaling
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af16961524284e54491133548920258b, type: 3}
+--- !u!1 &6645338508749371824 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000010921973622, guid: af16961524284e54491133548920258b, type: 3}
+  m_PrefabInstance: {fileID: 6646030656079687366}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &4399283435072171503
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6645338508749371824}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.0000001
+  m_Height: 1.7012801
+  m_Direction: 1
+  m_Center: {x: -0.00000059604645, y: 0, z: 0}
+--- !u!114 &3168277778442649222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6645338508749371824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a784a5cc9609ad9458b22de632fe751f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  point: 10
+  effectPrefab: {fileID: 8771972552311404799, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}

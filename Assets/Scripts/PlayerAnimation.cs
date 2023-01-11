@@ -12,9 +12,11 @@ public class PlayerAnimation : MonoBehaviour
         TryGetComponent(out anim);    
     }
 
-    
+    /// <summary>
+    /// 移動アニメと待機アニメの制御
+    /// </summary>
+    /// <param name="magnitude"></param>
     public void PlayWalkAnim(float magnitude) {
-        anim.SetFloat("Speed", magnitude);
+        anim.SetFloat(PlayerAnimationState.Speed.ToString(), magnitude);
     }
-
 }
