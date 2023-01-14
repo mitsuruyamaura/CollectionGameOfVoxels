@@ -15,28 +15,76 @@ public class GemSpawner : MonoBehaviour
     [SerializeField]
     private GameObject gemPrefab;
 
+    public float spawnInterval;
+
+    private float timer;
+
     [SerializeField]
     private Transform[] spawnGemTrans;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public bool isSpawnGem;
+
+
+    void Start() {
+        // 宝石の生成
         //SpawnGem();
+
+        StartCoroutine(ObserveTimer());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+
+    //void Update()
+    //{
+    //    SpawnTimer();
+
+
+    //    if (Input.GetKeyDown(KeyCode.Space)) {
+    //        RandomSpawnGem();
+    //    }
+    //}
+
+    /// <summary>
+    /// 時間経過による宝石の生成
+    /// </summary>
+    private void SpawnTimer() {
+        timer += Time.deltaTime;
+
+        if (timer >= spawnInterval) {
+            timer = 0;
             SpawnGem();
         }
     }
 
-
+    /// <summary>
+    /// 宝石の生成
+    /// </summary>
     public void SpawnGem() {
 
+        // 生成
+        Instantiate(gemPrefab);
+
+        Debug.Log("宝石生成");
+    }
+
+
+    private IEnumerator ObserveTimer() {
+
+        while (isSpawnGem) {
+            timer += Time.deltaTime;
+
+            if (timer >= spawnInterval) {
+                timer = 0;
+                RandomSpawnGem();
+            }
+
+            yield return null;
+        }
+
+    }
+
+    private void RandomSpawnGem() {
         // 生成位置をランダムに決定
-        Vector3 spawnPos = new (Random.Range(spawnGemTrans[0].position.x, spawnGemTrans[1].position.x), 0, Random.Range(spawnGemTrans[0].position.z, spawnGemTrans[1].position.z));
+        Vector3 spawnPos = new(Random.Range(spawnGemTrans[0].position.x, spawnGemTrans[1].position.x), spawnGemTrans[0].position.y, Random.Range(spawnGemTrans[0].position.z, spawnGemTrans[1].position.z));
 
         // 生成
         var gem = Instantiate(gemPrefab, spawnPos, gemPrefab.transform.rotation);
@@ -48,8 +96,10 @@ public class GemSpawner : MonoBehaviour
             // hit.position の値は、ベイクしたエリア内に置ける Position の場合には、gem の position と同じ値をそのまま代入し直す
             // そうでない場合には、一番近い NavMesh のベイクエリアの Position の値を代入する
             gem.transform.position = hit.position;
+
+            Debug.Log("宝石の位置調整して配置");
         } else {
-            Debug.Log("Gem の配置が出来ません。");
+            Debug.Log("宝石の位置　調整なし");
         }
     }
 }
