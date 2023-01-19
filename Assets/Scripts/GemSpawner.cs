@@ -12,8 +12,13 @@ using UnityEngine.AI;
 
 public class GemSpawner : MonoBehaviour
 {
+    //[SerializeField]
+    //private GameObject gemPrefab;
+
+
     [SerializeField]
-    private GameObject gemPrefab;
+    private Gem[] gemPrefabs;
+
 
     public float spawnInterval;
 
@@ -61,7 +66,7 @@ public class GemSpawner : MonoBehaviour
     public void SpawnGem() {
 
         // 生成
-        Instantiate(gemPrefab);
+        //Instantiate(gemPrefab);
 
         Debug.Log("宝石生成");
     }
@@ -86,8 +91,12 @@ public class GemSpawner : MonoBehaviour
         // 生成位置をランダムに決定
         Vector3 spawnPos = new(Random.Range(spawnGemTrans[0].position.x, spawnGemTrans[1].position.x), spawnGemTrans[0].position.y, Random.Range(spawnGemTrans[0].position.z, spawnGemTrans[1].position.z));
 
+        // 生成するジェムをランダムに決定
+        int gemIndex = Random.Range(0, gemPrefabs.Length);
+
+
         // 生成
-        var gem = Instantiate(gemPrefab, spawnPos, gemPrefab.transform.rotation);
+        var gem = Instantiate(gemPrefabs[gemIndex], spawnPos, gemPrefabs[gemIndex].transform.rotation);
 
         // SamplePosition は、第4引数に指定した範囲内の NavMesh において、第1引数について、最も近い点を検索する。見つかった場合には hit に代入される。置けない場合だけ false になる
         // navMeshHit変数は、NavMeshベイクエリアに置ける場合は、gem の positionの情報が代入される
