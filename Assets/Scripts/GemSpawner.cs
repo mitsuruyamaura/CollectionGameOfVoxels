@@ -6,7 +6,7 @@ using UnityEngine.AI;
 // NavMesh.SamplePosition
 // https://docs.unity3d.com/ja/current/ScriptReference/AI.NavMesh.SamplePosition.html
 
-// [Unity][C# Script] “GƒLƒƒƒ‰‚ğNavMesh‚Å‚©‚µ‚±‚­‚©‚Á‚±‚æ‚­“®‚©‚µ‚Ä‚İ‚æ‚¤B
+// [Unity][C# Script] æ•µã‚­ãƒ£ãƒ©ã‚’NavMeshã§ã‹ã—ã“ãã‹ã£ã“ã‚ˆãå‹•ã‹ã—ã¦ã¿ã‚ˆã†ã€‚
 // https://zenn.dev/k1togami/articles/71519622146168
 
 
@@ -31,7 +31,7 @@ public class GemSpawner : MonoBehaviour
 
 
     void Start() {
-        // •óÎ‚Ì¶¬
+        // å®çŸ³ã®ç”Ÿæˆ
         //SpawnGem();
 
         StartCoroutine(ObserveTimer());
@@ -49,7 +49,7 @@ public class GemSpawner : MonoBehaviour
     //}
 
     /// <summary>
-    /// ŠÔŒo‰ß‚É‚æ‚é•óÎ‚Ì¶¬
+    /// æ™‚é–“çµŒéã«ã‚ˆã‚‹å®çŸ³ã®ç”Ÿæˆ
     /// </summary>
     private void SpawnTimer() {
         timer += Time.deltaTime;
@@ -61,14 +61,14 @@ public class GemSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// •óÎ‚Ì¶¬
+    /// å®çŸ³ã®ç”Ÿæˆ
     /// </summary>
     public void SpawnGem() {
 
-        // ¶¬
+        // ç”Ÿæˆ
         //Instantiate(gemPrefab);
 
-        Debug.Log("•óÎ¶¬");
+        Debug.Log("å®çŸ³ç”Ÿæˆ");
     }
 
 
@@ -88,27 +88,27 @@ public class GemSpawner : MonoBehaviour
     }
 
     private void RandomSpawnGem() {
-        // ¶¬ˆÊ’u‚ğƒ‰ƒ“ƒ_ƒ€‚ÉŒˆ’è
+        // ç”Ÿæˆä½ç½®ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«æ±ºå®š
         Vector3 spawnPos = new(Random.Range(spawnGemTrans[0].position.x, spawnGemTrans[1].position.x), spawnGemTrans[0].position.y, Random.Range(spawnGemTrans[0].position.z, spawnGemTrans[1].position.z));
 
-        // ¶¬‚·‚éƒWƒFƒ€‚ğƒ‰ƒ“ƒ_ƒ€‚ÉŒˆ’è
+        // ç”Ÿæˆã™ã‚‹ã‚¸ã‚§ãƒ ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«æ±ºå®š
         int gemIndex = Random.Range(0, gemPrefabs.Length);
 
 
-        // ¶¬
+        // ç”Ÿæˆ
         var gem = Instantiate(gemPrefabs[gemIndex], spawnPos, gemPrefabs[gemIndex].transform.rotation);
 
-        // SamplePosition ‚ÍA‘æ4ˆø”‚Éw’è‚µ‚½”ÍˆÍ“à‚Ì NavMesh ‚É‚¨‚¢‚ÄA‘æ1ˆø”‚É‚Â‚¢‚ÄAÅ‚à‹ß‚¢“_‚ğŒŸõ‚·‚éBŒ©‚Â‚©‚Á‚½ê‡‚É‚Í hit ‚É‘ã“ü‚³‚ê‚éB’u‚¯‚È‚¢ê‡‚¾‚¯ false ‚É‚È‚é
-        // navMeshHit•Ï”‚ÍANavMeshƒxƒCƒNƒGƒŠƒA‚É’u‚¯‚éê‡‚ÍAgem ‚Ì position‚Ìî•ñ‚ª‘ã“ü‚³‚ê‚é
-        // NavMeshƒxƒCƒNƒGƒŠƒA‚¶‚á‚È‚¢ê‡Aˆê”Ô‹ß‚¢NavMeshƒxƒCƒNƒGƒŠƒA‚Ìî•ñ‚ª‘ã“ü‚³‚ê‚é
+        // SamplePosition ã¯ã€ç¬¬4å¼•æ•°ã«æŒ‡å®šã—ãŸç¯„å›²å†…ã® NavMesh ã«ãŠã„ã¦ã€ç¬¬1å¼•æ•°ã«ã¤ã„ã¦ã€æœ€ã‚‚è¿‘ã„ç‚¹ã‚’æ¤œç´¢ã™ã‚‹ã€‚è¦‹ã¤ã‹ã£ãŸå ´åˆã«ã¯ hit ã«ä»£å…¥ã•ã‚Œã‚‹ã€‚ç½®ã‘ãªã„å ´åˆã ã‘ false ã«ãªã‚‹
+        // navMeshHitå¤‰æ•°ã¯ã€NavMeshãƒ™ã‚¤ã‚¯ã‚¨ãƒªã‚¢ã«ç½®ã‘ã‚‹å ´åˆã¯ã€gem ã® positionã®æƒ…å ±ãŒä»£å…¥ã•ã‚Œã‚‹
+        // NavMeshãƒ™ã‚¤ã‚¯ã‚¨ãƒªã‚¢ã˜ã‚ƒãªã„å ´åˆã€ä¸€ç•ªè¿‘ã„NavMeshãƒ™ã‚¤ã‚¯ã‚¨ãƒªã‚¢ã®æƒ…å ±ãŒä»£å…¥ã•ã‚Œã‚‹
         if (NavMesh.SamplePosition(gem.transform.position, out NavMeshHit hit, 1.0f, NavMesh.AllAreas)) {
-            // hit.position ‚Ì’l‚ÍAƒxƒCƒN‚µ‚½ƒGƒŠƒA“à‚É’u‚¯‚é Position ‚Ìê‡‚É‚ÍAgem ‚Ì position ‚Æ“¯‚¶’l‚ğ‚»‚Ì‚Ü‚Ü‘ã“ü‚µ’¼‚·
-            // ‚»‚¤‚Å‚È‚¢ê‡‚É‚ÍAˆê”Ô‹ß‚¢ NavMesh ‚ÌƒxƒCƒNƒGƒŠƒA‚Ì Position ‚Ì’l‚ğ‘ã“ü‚·‚é
+            // hit.position ã®å€¤ã¯ã€ãƒ™ã‚¤ã‚¯ã—ãŸã‚¨ãƒªã‚¢å†…ã«ç½®ã‘ã‚‹ Position ã®å ´åˆã«ã¯ã€gem ã® position ã¨åŒã˜å€¤ã‚’ãã®ã¾ã¾ä»£å…¥ã—ç›´ã™
+            // ãã†ã§ãªã„å ´åˆã«ã¯ã€ä¸€ç•ªè¿‘ã„ NavMesh ã®ãƒ™ã‚¤ã‚¯ã‚¨ãƒªã‚¢ã® Position ã®å€¤ã‚’ä»£å…¥ã™ã‚‹
             gem.transform.position = hit.position;
 
-            Debug.Log("•óÎ‚ÌˆÊ’u’²®‚µ‚Ä”z’u");
+            Debug.Log("å®çŸ³ã®ä½ç½®èª¿æ•´ã—ã¦é…ç½®");
         } else {
-            Debug.Log("•óÎ‚ÌˆÊ’u@’²®‚È‚µ");
+            Debug.Log("å®çŸ³ã®ä½ç½®ã€€èª¿æ•´ãªã—");
         }
     }
 }
