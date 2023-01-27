@@ -11,6 +11,7 @@ public class Chaser : MonoBehaviour
     private SearchArea searchArea;
 
     [SerializeField] private float moveSpeed = 3.5f;
+    private bool isChasing = true;
 
     private void Reset() {
 
@@ -38,8 +39,12 @@ public class Chaser : MonoBehaviour
         if (!searchArea.SearchTarget) {
             return;
         }
-
+        
         //Debug.Log("距離" + (transform.position - searchArea.SearchTarget.position).sqrMagnitude);
+
+        if (!isChasing) {
+            return;
+        }
         
         if ((transform.position - searchArea.SearchTarget.position).sqrMagnitude < 30.0f) {
             agent.speed = moveSpeed * 2f;
@@ -54,5 +59,11 @@ public class Chaser : MonoBehaviour
     public void StopMove() {
         agent.speed = 0;
         agent.ResetPath();
+        isChasing = false;
+    }
+
+
+    public void ReduceMose() {
+        isChasing = true;
     }
 }
