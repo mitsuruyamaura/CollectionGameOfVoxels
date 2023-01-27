@@ -1381,7 +1381,7 @@ MonoBehaviour:
   - {fileID: 6505230525098297665, guid: f27ffe171f55f104d940cee135e96238, type: 3}
   - {fileID: 3168277778442649222, guid: 32bc51dd519d0df4790f998ae9760d7d, type: 3}
   - {fileID: 5966593638713399386, guid: 6dca3fe531ac22a41b5712a806767d53, type: 3}
-  spawnInterval: 1
+  spawnInterval: 3
   spawnGemTrans:
   - {fileID: 1669619261}
   - {fileID: 747310699}
