@@ -32,27 +32,55 @@ public class EnemyAttack : MonoBehaviour
         }
         
         if (collider.TryGetComponent(out ScoreManager scoreManager)) {
+            // スコア半分
             scoreManager.HalfScore();
-            StartCoroutine(KnockBack(scoreManager.transform));
+            
+            // ノックバック
+            KnockBack(scoreManager.transform);
+            
+            // 攻撃後の処理
+            StartCoroutine(AttackAfter());
         }
     }
 
-
-    private IEnumerator KnockBack(Transform playerTran) {
+    /// <summary>
+    /// プレイヤーのノックバック
+    /// </summary>
+    /// <param name="playerTran"></param>
+    /// <returns></returns>
+    private void KnockBack(Transform playerTran) {
         Debug.Log("KnockBack");
 
-        gameObject.AddComponent<Rigidbody>().AddForce((playerTran.position - transform.position).normalized * knockBackPower);
-        Destroy(GetComponent<Rigidbody>());
-
-        //playerTran.DOMove((playerTran.position - transform.position).normalized * knockBackPower, 0.15f);
-//            .SetEase(Ease.InQuad);
+        // NavMesh で移動していなくても Rigigbody で物理演算で移動させるとバグる。アタッチしている時点で問題がありそう
+        // gameObject.AddComponent<Rigidbody>().AddForce((playerTran.position - transform.position).normalized * knockBackPower);
+        // Destroy(GetComponent<Rigidbody>());
         
+        // ノックバックする方向の設定。追跡者の反対位置にする
+        Vector3 dir = (playerTran.position - transform.position).normalized;
+        
+        // 地面にめり込まないように高さのみ調整
+        dir.y = playerTran.position.y;
+
+        // ノックバック
+        playerTran.DOMove(dir * knockBackPower, 0.15f)
+            .SetRelative() // 今の座標から移動させるので相対値を利用した移動にする
+            .SetEase(Ease.InQuad);
+    }
+
+    /// <summary>
+    /// アタック成功後の処理
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator AttackAfter() {
+        // 追跡停止
         _capsuleCollider.enabled = false;
         _searchArea.SearchTarget = null;
         _chaser.StopMove();
+        
         yield return new WaitForSeconds(2.0f);
 
+        // 追跡できる状態に戻す
         _capsuleCollider.enabled = true;
-        _chaser.ReduceMose();
+        _chaser.ResumeMove();
     }
 }

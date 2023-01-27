@@ -13,6 +13,7 @@ public class Chaser : MonoBehaviour
     [SerializeField] private float moveSpeed = 3.5f;
     private bool isChasing = true;
 
+    
     private void Reset() {
 
         Debug.Log(TryGetComponent(out agent) ? "NavMeshAgent 取得しました。" : "NavMeshAgent 取得出来ませんでした。");
@@ -46,24 +47,30 @@ public class Chaser : MonoBehaviour
             return;
         }
         
+        // 近づいたらスピードアップ
         if ((transform.position - searchArea.SearchTarget.position).sqrMagnitude < 30.0f) {
             agent.speed = moveSpeed * 2f;
         } else {
             agent.speed = moveSpeed;
         }
         
+        // 追跡対象の位置設定
         agent.SetDestination(searchArea.SearchTarget.position);
     }
 
-
+    /// <summary>
+    /// 追跡停止
+    /// </summary>
     public void StopMove() {
         agent.speed = 0;
         agent.ResetPath();
         isChasing = false;
     }
 
-
-    public void ReduceMose() {
+    /// <summary>
+    /// 追跡できる状態に戻す
+    /// </summary>
+    public void ResumeMove() {
         isChasing = true;
     }
 }

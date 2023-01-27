@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class SearchArea : MonoBehaviour
 {
     private Transform searchTarget;
@@ -10,6 +11,7 @@ public class SearchArea : MonoBehaviour
         get => searchTarget;
         set => searchTarget = value;
     }
+
 
     private void OnTriggerStay(Collider other) {
 
@@ -21,7 +23,6 @@ public class SearchArea : MonoBehaviour
             searchTarget = player.transform;
         }
     }
-
 
     private void OnTriggerExit(Collider other) {
         if (other.TryGetComponent(out PlayerMove player)) {
