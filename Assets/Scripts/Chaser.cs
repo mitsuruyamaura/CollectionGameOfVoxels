@@ -10,6 +10,8 @@ public class Chaser : MonoBehaviour
     private NavMeshAgent agent;
     private SearchArea searchArea;
 
+    [SerializeField] private float moveSpeed = 3.5f;
+
     private void Reset() {
 
         Debug.Log(TryGetComponent(out agent) ? "NavMeshAgent 取得しました。" : "NavMeshAgent 取得出来ませんでした。");
@@ -37,6 +39,14 @@ public class Chaser : MonoBehaviour
             return;
         }
 
+        //Debug.Log("距離" + (transform.position - searchArea.SearchTarget.position).sqrMagnitude);
+        
+        if ((transform.position - searchArea.SearchTarget.position).sqrMagnitude < 30.0f) {
+            agent.speed = moveSpeed * 2f;
+        } else {
+            agent.speed = moveSpeed;
+        }
+        
         agent.SetDestination(searchArea.SearchTarget.position);
     }
 }
