@@ -8,6 +8,7 @@ public class SearchArea : MonoBehaviour
     private Transform searchTarget;
     public Transform SearchTarget {
         get => searchTarget;
+        set => searchTarget = value;
     }
 
     private void OnTriggerStay(Collider other) {

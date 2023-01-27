@@ -49,4 +49,10 @@ public class Chaser : MonoBehaviour
         
         agent.SetDestination(searchArea.SearchTarget.position);
     }
+
+
+    public void StopMove() {
+        agent.speed = 0;
+        agent.ResetPath();
+    }
 }

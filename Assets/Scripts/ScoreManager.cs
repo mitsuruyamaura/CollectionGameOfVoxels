@@ -37,4 +37,14 @@ public class ScoreManager : MonoBehaviour
 
         uiManager.UpdateDisplayScore(totalPoint);
     }
+
+    /// <summary>
+    /// スコアを半分にする
+    /// </summary>
+    public void HalfScore() {
+        totalPoint = Mathf.Max(0, totalPoint / 2);
+        Debug.Log("スコア合計値 : " + totalPoint);
+        
+        uiManager.UpdateDisplayScore(totalPoint);
+    }
 }
