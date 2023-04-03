@@ -6,7 +6,7 @@ using UniRx.Triggers;
 public class TimeManagerUpdateAsObservable : MonoBehaviour
 {
     [SerializeField] 
-    private int initialTime;
+    private int initialTime = 60;
     
     [SerializeField]
     private UIManager uiManager;

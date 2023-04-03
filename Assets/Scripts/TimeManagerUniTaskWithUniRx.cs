@@ -6,7 +6,7 @@ using Cysharp.Threading.Tasks;
 public class TimeManagerUniTaskWithUniRx : MonoBehaviour
 {
     [SerializeField] 
-    private int initialTime;
+    private int initialTime = 60;
     
     [SerializeField]
     private UIManager uiManager;

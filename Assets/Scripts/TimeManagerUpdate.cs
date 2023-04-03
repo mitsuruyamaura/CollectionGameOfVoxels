@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 public class TimeManagerUpdate : MonoBehaviour
 {
     [SerializeField] 
-    private int initialTime;
+    private int initialTime = 60;
     
     [SerializeField]
     private UIManager uiManager;
@@ -13,6 +13,11 @@ public class TimeManagerUpdate : MonoBehaviour
     private int currentTime;
     private float timer;
     
+    
+    void Reset() {
+        // 後で FindAnyObjectByType<>() に置き換える
+        uiManager = FindObjectOfType<UIManager>();
+    }
     
     void Start() {
         // 初期設定
