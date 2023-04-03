@@ -5,13 +5,18 @@ using UnityEngine.Serialization;
 public class TimeManagerCoroutine : MonoBehaviour
 {
     [SerializeField] 
-    private int initialTime;
+    private int initialTime = 60;
     
     [SerializeField]
     private UIManager uiManager;
 
     private int currentTime;
     
+    
+    void Reset() {
+        // 後で FindAnyObjectByType<>() に置き換える
+        uiManager = FindObjectOfType<UIManager>();
+    }
     
     // while と Start をコルーチン化の学習
     IEnumerator Start() {

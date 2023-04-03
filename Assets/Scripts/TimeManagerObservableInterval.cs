@@ -5,7 +5,7 @@ using UniRx;
 public class TimeManagerObservableInterval : MonoBehaviour
 {
     [SerializeField] 
-    private int initialTime;
+    private int initialTime = 60;
     
     [SerializeField]
     private UIManager uiManager;
