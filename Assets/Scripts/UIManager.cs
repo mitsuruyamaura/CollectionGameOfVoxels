@@ -1,20 +1,47 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField]
-    private Text txtScore;
+    [SerializeField] private Text txtScore;
 
+    [SerializeField] private Text txtTime;
+
+    [SerializeField] private Ease easeScore = Ease.Linear;
+    
+    private int prevScore;
+
+
+    void Start() {
+        Reset();    
+    }
+    
+    void Reset() {
+        prevScore = 0;
+    }
 
     /// <summary>
-    /// スコアの表示更新
+    /// 繧ｹ繧ｳ繧｢縺ｮ陦ｨ遉ｺ譖ｴ譁ｰ
     /// </summary>
     /// <param name="score"></param>
     public void UpdateDisplayScore(int score) {
-        txtScore.text = score.ToString();
+        //txtScore.text = score.ToString();
+
+        txtTime.DOCounter(prevScore, score, 0.5f).SetEase(easeScore);
+        
+        prevScore = score;
     }
+
+    /// <summary>
+    /// 繧ｲ繝ｼ繝譎る俣縺ｮ陦ｨ遉ｺ譖ｴ譁ｰ
+    /// </summary>
+    /// <param name="time"></param>
+    public void UpdateDisplayTime(int time) {
+        txtTime.text = time.ToString();
+    }
+
 }
