@@ -15,6 +15,11 @@ public class TimeManagerUpdateAsObservable : MonoBehaviour
     
     private float timer;
     
+    
+    void Reset() {
+        // 後で FindAnyObjectByType<>() に置き換える
+        uiManager = FindObjectOfType<UIManager>();
+    }
 
     void Start()
     {
@@ -24,6 +29,7 @@ public class TimeManagerUpdateAsObservable : MonoBehaviour
         
         // UpdateAsObservableを使用して、毎フレーム処理を実行
         this.UpdateAsObservable()
+            .Where(_ => currentTime > 0)
             .Subscribe(_ =>
             {
                 timer += Time.deltaTime; // タイマーに経過時間を加算
@@ -33,15 +39,12 @@ public class TimeManagerUpdateAsObservable : MonoBehaviour
                     timer = 0; // タイマーをリセット
                     currentTime--; // カウントを1つ減らす
                     uiManager.UpdateDisplayTime(currentTime);
+                    Debug.Log($"Current count: {currentTime}");
                     
                     if (currentTime <= 0)
                     {
                         Debug.Log("Countdown finished!");
                         this.enabled = false; // このスクリプトを無効化
-                    }
-                    else
-                    {
-                        Debug.Log($"Current count: {currentTime}");
                     }
                 }
             })

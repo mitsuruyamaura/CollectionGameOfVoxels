@@ -13,6 +13,7 @@ using UnityEngine.AI;
 public class PlayerJump : MonoBehaviour
 {
     private NavMeshAgent agent;
+    private PlayerMove playerMove;     // DOJump でのジャンプの際に利用する
     
     // 不要
     // private Rigidbody rb;
@@ -24,6 +25,10 @@ public class PlayerJump : MonoBehaviour
     private void Reset() {
          if (!TryGetComponent(out agent)) {
              Debug.Log("NavMeshAgent 取得出来ませんでした。");
+         }
+         
+         if (!TryGetComponent(out playerMove)) {
+             Debug.Log("PlayerMove 取得出来ませんでした。");
          }
     
          // 不要
@@ -101,15 +106,30 @@ public class PlayerJump : MonoBehaviour
     /// ジャンプ
     /// </summary>
     private void Jump() {
+        // transform での移動であれば切らなくてもジャンプ自体はできる
+        // 重複ジャンプ防止のために専用の変数を作成しなくてもいいように、こちらをフラグとして利用するために切っている
         agent.enabled = false;
         float y = transform.position.y;
 
-        Sequence sequence = DOTween.Sequence();
-        // ジャンプ
-        sequence.Append(transform.DOJump(new Vector3(Input.GetAxis("Horizontal") * 7, 3.0f, Input.GetAxis("Vertical") * 7), jumpPower, 1, 0.5f)
-                .SetRelative());
+        Sequence sequence = DOTween.Sequence(); 
+        
+        // DOJump でのジャンプ(どのパターンも正常に機能する)
+        // // ジャンプ①  リテラル表記
+        // sequence.Append(transform.DOJump(new Vector3(Input.GetAxis("Horizontal") * 7, 3.0f, Input.GetAxis("Vertical") * 7), jumpPower, 1, 0.5f)
+        //     .SetRelative());
+        //
+        // // ジャンプ②  戻り値１
+        // sequence.Append(transform.DOJump(new Vector3(playerMove.GetMoveVelocity().x, 3.0f, playerMove.GetMoveVelocity().y), jumpPower, 1, 0.5f)
+        //         .SetRelative());
+        
+        // ジャンプ③  戻り値２  タプル
+        // sequence.Append(transform.DOJump(new Vector3(playerMove.GetMoveVelocityTupple().moveX, 3.0f, playerMove.GetMoveVelocityTupple().moveZ), jumpPower, 1, 0.5f)
+        //     .SetRelative());
 
-        // 落下。こっちは SetRelative いらない。
+        // DOMoveY でのジャンプ
+        sequence.Append(transform.DOMoveY(3.0f, 0.5f).SetEase(Ease.OutQuad).SetRelative());
+        
+        // 落下。共通。こっちは SetRelative いらない。
         sequence.Append(transform.DOMoveY(y, 0.25f)
                 .SetEase(Ease.OutQuad))
                 .OnComplete(() =>

@@ -12,7 +12,12 @@ public class TimeManagerObservableInterval : MonoBehaviour
 
     private int currentTime;
     private IDisposable subscription;   // System.IDisposable
-    
+
+
+    void Reset() {
+        // 後で FindAnyObjectByType<>() に置き換える
+        uiManager = FindObjectOfType<UIManager>();
+    }
 
     void Start() {
         currentTime = initialTime;
@@ -25,15 +30,12 @@ public class TimeManagerObservableInterval : MonoBehaviour
         {
             currentTime--;
             uiManager.UpdateDisplayTime(currentTime);
+            Debug.Log($"Current count: {currentTime}");
             
             if (currentTime <= 0)
             {
                 Debug.Log("Countdown finished!");
                 subscription.Dispose(); // イベントの購読を解除
-            }
-            else
-            {
-                Debug.Log($"Current count: {currentTime}");
             }
         });
             

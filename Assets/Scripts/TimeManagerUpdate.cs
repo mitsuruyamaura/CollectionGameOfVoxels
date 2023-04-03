@@ -1,10 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TimeManagerUpdate : MonoBehaviour
 {
     [SerializeField] 
-    private int gameTime;
+    private int initialTime;
     
     [SerializeField]
     private UIManager uiManager;
@@ -13,9 +14,9 @@ public class TimeManagerUpdate : MonoBehaviour
     private float timer;
     
     
-    IEnumerator Start() {
+    void Start() {
         // 初期設定
-        currentTime = gameTime;
+        currentTime = initialTime;
         uiManager.UpdateDisplayTime(currentTime);
     }
     
@@ -27,15 +28,13 @@ public class TimeManagerUpdate : MonoBehaviour
             timer = 0; // タイマーをリセット
             currentTime--; // カウントを1つ減らす
 
+            uiManager.UpdateDisplayTime(currentTime);
+            Debug.Log($"Current count: {currentTime}");
+            
             if (currentTime <= 0)
             {
                 Debug.Log("Countdown finished!");
                 this.enabled = false; // このスクリプトを無効化
-            }
-            else
-            {
-                uiManager.UpdateDisplayTime(currentTime);
-                Debug.Log($"Current count: {currentTime}");
             }
         }
     }

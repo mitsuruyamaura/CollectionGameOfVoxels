@@ -1,10 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TimeManagerCoroutine : MonoBehaviour
 {
     [SerializeField] 
-    private int gameTime;
+    private int initialTime;
     
     [SerializeField]
     private UIManager uiManager;
@@ -15,7 +16,7 @@ public class TimeManagerCoroutine : MonoBehaviour
     // while と Start をコルーチン化の学習
     IEnumerator Start() {
         // 初期設定
-        currentTime = gameTime;
+        currentTime = initialTime;
         uiManager.UpdateDisplayTime(currentTime);
         
         // 時間経過の監視
@@ -26,6 +27,6 @@ public class TimeManagerCoroutine : MonoBehaviour
             Debug.Log($"Current count: {currentTime}");
         }
         
-        Debug.Log("残り時間 0");
+        Debug.Log("Countdown finished!");
     }
 }

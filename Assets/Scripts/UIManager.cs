@@ -31,7 +31,8 @@ public class UIManager : MonoBehaviour
     public void UpdateDisplayScore(int score) {
         //txtScore.text = score.ToString();
 
-        txtTime.DOCounter(prevScore, score, 0.5f).SetEase(easeScore);
+        // 時間のときに一緒にやる(Ease の設定込み)
+        txtScore.DOCounter(prevScore, score, 0.5f).SetEase(easeScore);
         
         prevScore = score;
     }
