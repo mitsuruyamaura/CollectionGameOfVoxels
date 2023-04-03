@@ -60,4 +60,20 @@ public class PlayerMove : MonoBehaviour
         //    transform.rotation = Quaternion.LookRotation(moveForward);
         //}
     }
+
+    /// <summary>
+    /// 現在の移動速度の取得
+    /// </summary>
+    /// <returns></returns>
+    public Vector2 GetMoveVelocity() {
+        return new Vector2(rb.velocity.x, rb.velocity.z);
+    }
+
+    /// <summary>
+    /// 現在の移動速度の取得用の戻り値にタプル利用
+    /// </summary>
+    /// <returns></returns>
+    public (float moveX, float moveZ) GetMoveVelocityTupple() {
+        return (rb.velocity.x, rb.velocity.z);
+    }
 }
