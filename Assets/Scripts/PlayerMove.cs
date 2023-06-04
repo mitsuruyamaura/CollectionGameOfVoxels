@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 3.0f;
 
-    public float MoveSpeed { get; set; }
+    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
 
     private Rigidbody rb;
     private PlayerAnimation playerAnim;
